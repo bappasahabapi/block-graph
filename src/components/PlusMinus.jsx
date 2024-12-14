@@ -5,7 +5,12 @@ const BLOCK_SIZE = 96;
 
 const PlusMinus = () => {
   const [blocks, setBlocks] = useState([
-    { id: "0", x: Math.random() * (window.innerWidth - 300) + 100, y: Math.random() * (window.innerHeight - 300) + 100, parentId: null },
+    {
+      id: "0",
+      x: Math.random() * (window.innerWidth - 300) + 100,
+      y: Math.random() * (window.innerHeight - 300) + 100,
+      parentId: null,
+    },
   ]);
 
   const createNewBlock = (parentId) => {
@@ -19,31 +24,44 @@ const PlusMinus = () => {
   };
 
   const removeBlock = (blockId) => {
-    setBlocks(blocks.filter((block) => block.id !== blockId && block.parentId !== blockId));
-  };
-
-  const handleDrag = (blockId, x, y) => {
     setBlocks(
-      blocks.map((block) =>
-        block.id === blockId ? { ...block, x, y } : block
+      blocks.filter(
+        (block) => block.id !== blockId && block.parentId !== blockId
       )
     );
   };
 
+  const handleDrag = (blockId, x, y) => {
+    setBlocks(
+      blocks.map((block) => (block.id === blockId ? { ...block, x, y } : block))
+    );
+  };
+
   return (
-    <div className="h-screen bg-pink-200 flex items-center justify-center relative overflow-hidden">
-      {blocks.map((block) => (
-        <React.Fragment key={block.id}>
-          <Block block={block} onCreateNew={createNewBlock} onRemove={removeBlock} onDrag={handleDrag} />
-          {block.parentId && (
-            <Line
-              parent={blocks.find((b) => b.id === block.parentId)}
-              child={block}
+    <>
+      
+      <div className="h-screen bg-pink-200 flex items-center justify-center relative overflow-hidden">
+      <h1 className="text-2xl  opacity-25  ">
+        Tree Formation Block Graph | using react js | bappa saha | page: 02
+      </h1>
+        {blocks.map((block) => (
+          <React.Fragment key={block.id}>
+            <Block
+              block={block}
+              onCreateNew={createNewBlock}
+              onRemove={removeBlock}
+              onDrag={handleDrag}
             />
-          )}
-        </React.Fragment>
-      ))}
-    </div>
+            {block.parentId && (
+              <Line
+                parent={blocks.find((b) => b.id === block.parentId)}
+                child={block}
+              />
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -114,8 +132,11 @@ const Line = ({ parent, child }) => {
   const childCenterX = child.x + BLOCK_SIZE / 2;
   const childCenterY = child.y + BLOCK_SIZE / 2;
 
-  const angle = Math.atan2(childCenterY - parentCenterY, childCenterX - parentCenterX);
-  
+  const angle = Math.atan2(
+    childCenterY - parentCenterY,
+    childCenterX - parentCenterX
+  );
+
   const parentEdgeX = parentCenterX + (BLOCK_SIZE / 2) * Math.cos(angle);
   const parentEdgeY = parentCenterY + (BLOCK_SIZE / 2) * Math.sin(angle);
 
@@ -141,7 +162,7 @@ const Line = ({ parent, child }) => {
         y2={childEdgeY}
         stroke="black"
         strokeWidth="2"
-        strokeDasharray="5, 5" 
+        strokeDasharray="5, 5"
       />
     </svg>
   );
