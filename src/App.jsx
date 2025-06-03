@@ -1,25 +1,11 @@
-// import BinarySearch from "./components/BinarySearch";
-// import PlusMinus from "./components/PlusMinus";
 
-
-
-// const App = () => {
-  
-// return(
-//   <>
-//   <BinarySearch/>
-//     <PlusMinus/>
-//   </>
-// )
-
-// }
-//   export default App;
 
 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import BinarySearch from './components/BinarySearch';
 import PlusMinus from './components/PlusMinus';
 import StringReverseVisualizer from './components/ReverseString';
+import PrimeNumberVisualizer from './components/Prime';
 
 
 const App = () => {
@@ -42,6 +28,11 @@ const App = () => {
       Two Pointer
     </button>
   </Link>
+  <Link to="/prime">
+    <button className="bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+      Prime Number 
+    </button>
+  </Link>
 </div>
 <hr className="mt-5 p-0 border-t-2 border-black" />
 
@@ -50,6 +41,7 @@ const App = () => {
         <Routes>
           <Route path="/binary-search" element={<BinarySearch />} />
           <Route path="/string-reverse" element={<StringReverseVisualizer />} />
+          <Route path="/prime" element={<PrimeNumberVisualizer />} />
           <Route path="/block-graph" element={<PlusMinus />} /> {/* Default route */}
         </Routes>
       </div>
