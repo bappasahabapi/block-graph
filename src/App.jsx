@@ -6,6 +6,7 @@ import BinarySearch from './components/BinarySearch';
 import PlusMinus from './components/PlusMinus';
 import StringReverseVisualizer from './components/ReverseString';
 import PrimeNumberVisualizer from './components/Prime';
+import MergeSortVisualizer from './components/MergeSort';
 
 
 const App = () => {
@@ -33,6 +34,11 @@ const App = () => {
       Prime Number 
     </button>
   </Link>
+  <Link to="/merge-sort">
+    <button className="bg-lime-500 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+     Merge Sort 
+    </button>
+  </Link>
 </div>
 <hr className="mt-5 p-0 border-t-2 border-black" />
 
@@ -43,6 +49,7 @@ const App = () => {
           <Route path="/string-reverse" element={<StringReverseVisualizer />} />
           <Route path="/prime" element={<PrimeNumberVisualizer />} />
           <Route path="/block-graph" element={<PlusMinus />} /> {/* Default route */}
+          <Route path="/merge-sort" element={<MergeSortVisualizer />} /> {/* Default route */}
         </Routes>
       </div>
     </Router>
